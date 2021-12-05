@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
-{
-    [SerializeField]
-    Transform target;
-    [SerializeField][Range(0.3f,50f)]
-    float smooth;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+namespace EvoGame.Camera
+
+{
+    public class CameraFollow : MonoBehaviour
     {
-        transform.position = Vector3.Lerp(transform.position, target.position, smooth * Time.deltaTime);
+        [SerializeField] Transform _target;
+        [SerializeField] [Range(0.3f, 4f)] float _smoothSpeed;
+
+        // Update is called once per frame
+        void Update()
+        {
+            transform.position = Vector3.Lerp(transform.position, _target.position, _smoothSpeed * Time.deltaTime);
+        }
     }
 }
+

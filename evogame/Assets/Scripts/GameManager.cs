@@ -2,27 +2,41 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+namespace EvoGame.Managers
 {
-    public Joystick joystick;
-
-    private Vector3 commandDirection;
-
-    public GameObject player;
-
-    private Rigidbody playerRb;
-
-    public float playerSpeed = 20;
-    // Start is called before the first frame update
-    void Start()
+    public class GameManager : MonoBehaviour
     {
-        playerRb = player.GetComponent<Rigidbody>();
-    }
+        public Joystick joystick;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButton(0))
+        private Vector3 commandDirection;
+
+        public GameObject player;
+
+        private Rigidbody playerRb;
+
+        public float playerSpeed = 20;
+        // Start is called before the first frame update
+        void Start()
+        {
+            playerRb = player.GetComponent<Rigidbody>();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (Input.GetMouseButton(0))
+            {
+                JoyStickMovement();
+            }
+
+        
+            if (Input.GetMouseButtonUp(0))
+            {
+                playerRb.velocity = Vector3.zero;
+            }
+        }
+
+        void JoyStickMovement()
         {
             var deltaPosition = joystick.Direction;
 
@@ -46,11 +60,7 @@ public class GameManager : MonoBehaviour
 
             float magnitude = playerRb.velocity.magnitude;
         }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            playerRb.velocity = Vector3.zero;
-        }
     }
-
 }
+
+
